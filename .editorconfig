@@ -1,0 +1,18 @@
+# Keeps formatting consistent across everyone's editor.
+# Most editors support this natively; VS Code needs the EditorConfig extension.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{png,jpg,jpeg,gif,webp,avif,ico,woff,woff2,ttf,otf,eot}]
+insert_final_newline = false
+trim_trailing_whitespace = false
