@@ -26,8 +26,19 @@ the rendered design as the spec and don't restyle it.
 
 ## Responsive
 
-Desktop and mobile are the **same HTML file**, switched at **1280px**. No
-separate mobile files, no user-agent detection.
+Desktop and mobile are the **same HTML file**. No separate mobile files, no
+user-agent detection. There are **two independent breakpoints**:
+
+| Width | Body layout | Header |
+|---|---|---|
+| < 768px | mobile design | hamburger |
+| 768–1279px | **desktop design** (tablet) | hamburger |
+| ≥ 1280px | desktop design | full nav |
+
+Tablets get the desktop layout, not a stretched phone column. No tablet design
+was drawn, so 768–1439px runs the desktop layout with the pieces that refuse
+to narrow released — fixed flex-bases, min-content floors, the 100px gutter —
+and the Final Record grid stacked. Nothing is restyled beyond what overflows.
 
 The two designs were authored independently and their content differs — the
 mobile For Funeral Homes and Home are deliberately shorter, and For Attorneys
@@ -41,9 +52,15 @@ serve both, so each page carries both:
 **A copy change has to be made in both blocks.** That is the cost of running
 two designs; check the other block whenever you edit text.
 
-1280px is where the desktop header stops fitting, so it cannot be moved lower
-without redesigning the header. Between 480px and 1280px the mobile column
-sits centred — there is no tablet design.
+1280px is where the desktop header stops fitting, which is why the header
+switches there and the body switches lower, at 768px.
+
+**Header, mobile header and drawer are siblings of `<main>`, never inside it.**
+The homepage originally nested its header in `<main>` so it could overlay the
+hero; when the mobile markup was added that swept the header and drawer into
+`.fa-only-desktop`, and the homepage had no navigation at all on a phone. The
+overlay works from outside `<main>` because `.fa-page` is the positioning
+context.
 
 - **Mobile-first CSS** inside each block: mobile layout is the default with no
   media query; desktop rules go inside `@media (min-width: ...)`.

@@ -28,3 +28,25 @@
 a { color: #23395D; }
   a:hover { color: #BE9C71; }
   * { box-sizing: border-box; }
+
+/* --------------------------------------------------------------------------
+   Small screens
+
+   This page has no mobile design of its own — the mobile Your Memories wall
+   uses the swipe deck rather than linking to a detail view — so the desktop
+   markup is made to fit instead. Only what overflows is touched.
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  /* prev / next arrows sit either side of the card on desktop; stack them
+     under it rather than pushing the page sideways */
+  .fa-page main [style*="display: flex"] { flex-wrap: wrap; }
+
+  /* the note card's 60px side padding is most of a small phone's width */
+  .fa-page main [style*="rotate(-0.7deg)"] {
+    padding-inline: 24px !important;
+    max-width: 100% !important;
+  }
+
+  .fa-page main > * { padding-inline: 16px; }
+  .fa-page main * { min-width: 0; max-width: 100%; }
+}

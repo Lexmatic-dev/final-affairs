@@ -25,6 +25,9 @@
 }
 
 .fa-page {
+  /* positioning context for the homepage's overlay header, which sits over
+     the hero as a sibling of <main> rather than nested inside it */
+  position: relative;
   width: 100%;
   background: var(--fa-bone);
   font-family: 'Nunito Sans', sans-serif;
@@ -439,12 +442,18 @@
    The switch
    -------------------------------------------------------------------------- */
 @media (max-width: 1279px) {
+  /* Header and footer swap to the mobile treatment for the whole range —
+     the desktop header cannot fit below 1280px. */
   .fa-header,
-  .fa-footer__top,
-  .fa-only-desktop { display: none; }
+  .fa-footer__top { display: none; }
 
   .fa-header-m { display: flex; }
   .fa-drawer:not([hidden]) { display: block; }
+}
+
+/* The page body switches later: tablets keep the desktop layout. */
+@media (max-width: 767px) {
+  .fa-only-desktop { display: none; }
   .fa-only-mobile { display: block; }
 
   /* Mobile footer: centred logo, wrapped links, note beneath */
@@ -472,6 +481,9 @@
 
 @media (min-width: 1280px) {
   .fa-footer__m { display: none; }
+}
+
+@media (min-width: 768px) {
   .fa-only-mobile { display: none; }
   .fa-only-desktop { display: block; }
 }
@@ -489,7 +501,9 @@
    480px, so it reads correctly on a phone and sits centred on a tablet.
    -------------------------------------------------------------------------- */
 .fa-m-page {
-  width: 100%;
+  /* !important: some exports pin the frame to a fixed 390px, which overflows
+     a 360px phone. */
+  width: 100% !important;
   max-width: 480px;
   margin-inline: auto;
   background: var(--fa-bone);
@@ -503,3 +517,66 @@
    (e.g. iPhone SE at 320px) don't scroll sideways. */
 .fa-m-page,
 .fa-m-page * { min-width: 0 !important; }
+
+/* ==========================================================================
+   TABLET — 768px to 1279px
+
+   No tablet design was drawn, so this range runs the desktop layout with the
+   mobile header. The adjustments below are only what is needed to stop the
+   desktop layout, which was drawn on a 1440px canvas, from overflowing.
+   Nothing is restyled beyond that.
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 1439px) {
+  /* The 100px canvas gutter is too generous once the viewport is this narrow.
+     Above ~1288px the max() formula returns more than 24px anyway, so this
+     only bites where it is needed and is seamless at 1440px. */
+  :root { --fa-gutter-min: 24px; }
+
+  /* Only let ROW flex containers wrap. A blanket rule also wraps column
+     flexes, which lays their children out sideways instead. */
+  .fa-only-desktop [style*="display: flex"]:not([style*="column"]),
+  .fa-only-desktop [style*="display:flex"]:not([style*="column"]) { flex-wrap: wrap; }
+
+  /* Images pinned to a drawn pixel width become fluid */
+  .fa-only-desktop img:not([style*="position: absolute"]) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* The Final Record grid stacks: the indigo panel sits above the record
+     rather than beside it, which gives the family tree the full column. */
+  /* minmax(0,1fr), not 1fr: a bare 1fr will not shrink below its content's
+     min-content width, so the panel kept forcing the grid wider than the page. */
+  .fa-record__sheet { grid-template-columns: minmax(0, 1fr) !important; }
+}
+
+/* The family tree is a fixed 832px diagram; scale it to whatever the column
+   actually offers at each step. Values are the available width / 832. */
+@media (min-width: 1024px) and (max-width: 1279px) { .fa-record__tree { zoom: 1; } }
+@media (min-width:  900px) and (max-width: 1023px) { .fa-record__tree { zoom: 0.86; } }
+@media (min-width:  768px) and (max-width:  899px) { .fa-record__tree { zoom: 0.69; } }
+
+/* Below 768px the mobile designs take over; the desktop markup is hidden. */
+
+/* --------------------------------------------------------------------------
+   Narrow desktop — 768px to 1439px
+
+   The desktop layout was drawn for a 1240px content column, which only exists
+   at 1440px and up. Below that it has to be able to narrow, so the pieces that
+   refuse to are released: children pinned to a fixed flex-basis, and the
+   min-content floor that flex and grid children get by default.
+
+   This runs past the 1280px header switch on purpose — the column is still
+   under 1240px between 1280 and 1440.
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1439px) {
+  .fa-only-desktop [style*="flex: 0 0"] {
+    flex-shrink: 1 !important;
+    flex-basis: auto !important;
+  }
+  .fa-only-desktop [style*="display: grid"] > *,
+  .fa-only-desktop [style*="display: flex"] > * { min-width: 0; }
+
+  .fa-only-desktop [style*="display: flex"]:not([style*="column"]),
+  .fa-only-desktop [style*="display:flex"]:not([style*="column"]) { flex-wrap: wrap; }
+}
