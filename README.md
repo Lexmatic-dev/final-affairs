@@ -47,12 +47,14 @@ final-affairs/
 │   ├── for-attorneys.html
 │   ├── your-memories.html      ← the memories wall
 │   ├── memory-tree.html        ← single-note detail, linked from the wall
+│   ├── final-record.html       ← Eleanor Ruth Vance, found via wall search
 │   ├── contact-us.html
 │   └── assets/
 │       ├── css/
 │       │   ├── base.css        ← fonts + design tokens
 │       │   ├── components.css  ← header, footer, buttons, page shell
 │       │   └── pages/          ← per-page overrides
+│       ├── js/                 ← record search
 │       ├── img/
 │       └── fonts/              ← Nunito Sans, self-hosted
 │

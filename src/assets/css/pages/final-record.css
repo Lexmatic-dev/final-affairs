@@ -1,0 +1,9 @@
+/* final-record.css — the Final Record page (Eleanor Ruth Vance).
+   Page-local rules from the design export; site-wide rules live in base.css. */
+
+.fa-record {
+  background: #FCFAF8;
+  color: #262625;
+}
+
+a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified-badge]:hover>span,[data-verified-badge]:focus>span,[data-verified-badge]:focus-within>span{opacity:1!important;visibility:visible!important}

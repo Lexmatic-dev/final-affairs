@@ -6,7 +6,7 @@ build step, no package manager, no dependencies.
 ## Layout
 
 - `src/` — the deployed website. HTML pages at the top level, assets in
-  `src/assets/{css,img,fonts}/`.
+  `src/assets/{css,js,img,fonts}/`.
 - `design/` — original Claude Design exports, kept for reference. These are
   self-extracting React bundles (multi-MB, content packed in a base64
   manifest), **not** editable source. **Never deployed and never referenced by
@@ -74,8 +74,23 @@ The nav is duplicated in each HTML file. Adding or renaming an item means
 editing every page in `src/`. Mark the current page with `aria-current="page"`
 (that attribute, not a class, drives the active styling).
 
-`memory-tree.html` is a detail page reached from `your-memories.html`; it is
-not in the nav, and its "back to the wall" link returns to Your Memories.
+Three pages sit under Your Memories and are not in the nav. All three mark
+Your Memories as the current nav item:
+
+- `memory-tree.html` — a single shared note, reached from the wall; its
+  "back to the wall" link returns to `your-memories.html`.
+- `final-record.html` — the Final Record for Eleanor Ruth Vance, reached by
+  searching her name on the wall.
+
+## Final Record search
+
+`your-memories.html` has no search backend. `assets/js/record-search.js`
+holds a `RECORDS` list mapping names to record pages; a match navigates
+there, a miss shows a quiet status line. **Add an entry to `RECORDS` whenever
+a new Final Record page is added** — nothing else discovers them.
+
+Matching is deliberately loose (substring, either direction) so "eleanor",
+"Vance" and "Eleanor Ruth Vance" all resolve.
 
 ## Git
 

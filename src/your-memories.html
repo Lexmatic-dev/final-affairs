@@ -70,14 +70,14 @@
 <div style="display: flex; align-items: center; gap: 16px;">
 <div style="flex: 0 0 822px; width: 822px; margin-right: auto; display: flex; align-items: stretch; gap: 0px; border: 1px solid var(--rule); border-radius: 5px; background: var(--canvas); overflow: hidden;">
 <div style="display: flex; align-items: center; gap: 10px; flex: 1 1 auto; min-width: 0px; padding: 10px 14px;">
-<input aria-label="Name" placeholder="Name" style='width: 100%; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 17px; font-weight: 300; color: var(--onbg);' type="text" value=""/>
+<input aria-label="Search Final Records by name" autocomplete="off" id="record-search-name" placeholder="Name" style='width: 100%; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 17px; font-weight: 300; color: var(--onbg);' type="text" value=""/>
 </div>
 <div style="width: 1px; background: var(--rule);"></div>
 <div style="display: flex; align-items: center; flex: 0 0 190px; padding: 10px 14px;">
-<input aria-label="Date of birth" inputmode="numeric" maxlength="10" placeholder="MM / DD / YYYY" style='width: 100%; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 17px; font-weight: 300; letter-spacing: 0.02em; color: var(--onbg);' type="text" value=""/>
+<input aria-label="Date of birth, MM / DD / YYYY" autocomplete="off" id="record-search-date" inputmode="numeric" maxlength="10" placeholder="MM / DD / YYYY" style='width: 100%; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 17px; font-weight: 300; letter-spacing: 0.02em; color: var(--onbg);' type="text" value=""/>
 </div>
-<a class="scp2" href="#" style='display: flex; align-items: center; padding: 0px 24px; background: var(--head); color: var(--canvas); text-decoration: none; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em;'>SEARCH</a>
-</div>
+<a class="scp2" href="#" id="record-search-submit" role="button" style='display: flex; align-items: center; padding: 0px 24px; background: var(--head); color: var(--canvas); text-decoration: none; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em;'>SEARCH</a>
+</div><p aria-live="polite" hidden="" id="record-search-status" role="status" style="margin:10px 0 0;font-size:14px;font-weight:300;color:var(--muted);font-family:'Nunito Sans',system-ui,sans-serif"></p>
 <div style='display: flex; align-items: baseline; gap: 8px; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 10px; color: var(--muted2);'><span>SORT</span><span style="color: var(--head);">MOST RECENT</span></div>
 </div>
 <div style="column-count: 3; column-gap: 22px;">
@@ -215,7 +215,6 @@
 <a href="for-families.html">For Families</a>
 <a href="for-funeral-homes.html">For Funeral Homes</a>
 <a href="for-attorneys.html">For Attorneys</a>
-
 <a href="contact-us.html">Contact Us</a>
 <a class="fa-footer__action" href="#">Log In</a>
 </div>
@@ -223,5 +222,5 @@
 <p class="fa-footer__note">© Final Affairs. Guidance before and after a loss. Final Affairs is a technology and administrative-support company, not a law firm, and does not provide legal advice; legal advice and legal services are provided by independent licensed attorneys. Visiting or using this website does not create an attorney-client relationship; that relationship is formed only when you enter into a written engagement agreement with an attorney.</p>
 </footer>
 </div>
-</body>
+<script defer="" src="assets/js/record-search.js"></script></body>
 </html>
