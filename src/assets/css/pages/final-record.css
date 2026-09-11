@@ -94,3 +94,11 @@ a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified
   color: var(--fa-indigo);
   border-bottom-color: var(--fa-camel);
 }
+
+/* Accordions inside the record chapters (For you, Memories).
+   <details> rather than scripted panels: native, keyboard-accessible, and
+   the content is still reachable with no JavaScript at all. */
+.fa-racc__s::-webkit-details-marker { display: none; }
+.fa-racc__s::marker { content: ""; }
+.fa-racc .fa-racc__i::after { content: "+"; }
+.fa-racc[open] .fa-racc__i::after { content: "\2013"; color: var(--fa-camel); }
