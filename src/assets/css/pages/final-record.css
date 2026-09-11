@@ -56,3 +56,41 @@ a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified
   width: auto !important;
   height: auto !important;
 }
+
+/* ---------------------------------------------------------------------------
+   Record tabs (mobile)
+   ---------------------------------------------------------------------------
+   The tab strip is the mobile record's navigation: nine chapters, one shown
+   at a time. record-tabs.js drives it.
+
+   Panels are hidden with the `hidden` attribute, never opacity — with no
+   JavaScript every panel simply renders, one after another, so the whole
+   record is still readable. Only the strip becomes redundant, and it is
+   marked aria-hidden in that case by the script's absence being harmless. */
+
+/* Each panel carries an inline `display: flex` from the design export, which
+   outranks the UA's [hidden] rule — without this the attribute does nothing
+   and every chapter shows at once. A stylesheet !important is the one thing
+   that beats an inline declaration. */
+.fa-rpanel[hidden] { display: none !important; }
+
+.fa-rtab {
+  flex: 0 0 auto;
+  padding: 18px 12px 9px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: 9px;
+  font: 700 15px/1 var(--font-sans);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgb(138, 154, 176);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 220ms ease, border-color 220ms ease;
+}
+.fa-rtab:hover { color: var(--fa-indigo); }
+.fa-rtab[aria-selected="true"] {
+  color: var(--fa-indigo);
+  border-bottom-color: var(--fa-camel);
+}
