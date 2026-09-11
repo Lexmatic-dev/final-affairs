@@ -7,3 +7,15 @@
 }
 
 a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified-badge]:hover>span,[data-verified-badge]:focus>span,[data-verified-badge]:focus-within>span{opacity:1!important;visibility:visible!important}
+
+/* --------------------------------------------------------------------------
+   The record sits in the same 1240px column as every other page rather than
+   running edge to edge. The indigo sidebar keeps its own colour; it is the
+   sheet as a whole that is contained, so page background shows down both
+   sides. Header and footer stay full-width bars and are untouched.
+   -------------------------------------------------------------------------- */
+.fa-record__sheet {
+  max-width: var(--fa-content, 1240px);
+  margin-inline: max(var(--fa-gutter-min, 100px),
+                     calc((100% - var(--fa-content, 1240px)) / 2));
+}
