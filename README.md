@@ -45,7 +45,8 @@ final-affairs/
 │   ├── for-families.html
 │   ├── for-funeral-homes.html
 │   ├── for-attorneys.html
-│   ├── your-memories.html      ← placeholder, awaiting design
+│   ├── your-memories.html      ← the memories wall
+│   ├── memory-tree.html        ← single-note detail, linked from the wall
 │   ├── contact-us.html
 │   └── assets/
 │       ├── css/

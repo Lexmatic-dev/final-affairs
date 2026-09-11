@@ -1,0 +1,35 @@
+/* memory-tree.css — Your Memories pages
+   Design tokens local to this design, lifted from the export. */
+
+.fa-memories {
+  --canvas: #FCFAF8;
+  --paper: linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.55)), url('assets/img/memories-paper.jpg') 0 0/300px 300px repeat, #FFFFFF;
+  --head: #23395D;
+  --ink: #262625;
+  --onbg: #3f4a58;
+  --muted: #6f6a63;
+  --muted2: #6f6a63;
+  --dim: #9b968e;
+  --rule: #e5ddd2;
+  --nborder: #ece5db;
+  --hoverbg: #F2F5F7;
+  --selbg: #dfe7ec;
+  --chipbg: #23395D;
+  --chipink: #FCFAF8;
+  --notemeta: #6f6a63;
+  --insidemuted: #6f6a63;
+  --nradius: 10px;
+  --noise: 0.14;
+  --nshadow: 0 10px 30px rgba(35,57,93,0.10);
+  --dshadow: 0 18px 44px rgba(35,57,93,0.14);
+  --fshadow: 0 18px 44px rgba(35,57,93,0.12);
+}
+
+a { color: #23395D; }
+  a:hover { color: #BE9C71; }
+  * { box-sizing: border-box; }
+  header img { height: 96px !important; }
+  header nav a:not(:nth-child(5)) { font-weight: 400 !important; }
+  header nav { position: static !important; transform: none !important; margin-left: auto !important; margin-right: 32px !important; }
+  footer img { height: 84px !important; }
+  footer > div:first-child { height: auto !important; }

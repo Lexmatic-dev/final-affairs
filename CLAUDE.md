@@ -14,6 +14,10 @@ build step, no package manager, no dependencies.
 - `docs/` — team conventions. `structure.md` is the authority on naming,
   CSS organisation, and breakpoints.
 
+Note: `design/desktop/your memories desktop .html` is a design *canvas* holding
+two artboards — the Your Memories wall and the Memory Tree detail page — which
+became two separate pages in `src/`.
+
 The pages in `src/` were rebuilt from those bundles into plain static HTML.
 The design system, tokens, markup and copy are carried over faithfully — treat
 the rendered design as the spec and don't restyle it.
@@ -40,6 +44,9 @@ the rendered design as the spec and don't restyle it.
   100px at 1440px wide and grows beyond it, so backgrounds reach the screen
   edge while content stays at 1240px. Use `.fa-bleed` for full-width sections;
   don't hard-code a 1440px wrapper.
+- The Your Memories pages are the exception: they were designed on a 1320px
+  content column, not 1240px, and keep it. Their design-local tokens
+  (`--paper`, `--canvas`, `--ink`, …) live on `.fa-memories` in their page CSS.
 - Filenames: lowercase with dashes. No spaces, no capitals.
 
 ## Accessibility
@@ -51,16 +58,24 @@ text meets 4.5:1 contrast.
 
 ## Navigation
 
-Seven pages, in this order, on every page:
+Header nav — seven items, this order, on every page:
 Home · About Us · For Families · For Funeral Homes · For Attorneys ·
 Your Memories · Contact Us
 
-The nav is duplicated in each HTML file. Adding or renaming an item means
-editing every page in `src/` plus the footer link list — change all of them
-together. Mark the current page with `aria-current="page"` (that attribute,
-not a class, drives the active styling).
+Footer links — five, deliberately a subset (no Home, no Your Memories):
+About Us · For Families · For Funeral Homes · For Attorneys · Contact Us
 
-`your-memories.html` is an intentional placeholder awaiting its design.
+**Don't add a sixth footer link.** The footer row is logo + links + Log In on
+one line; a sixth link overflows the 1240px column and wraps the links onto
+their own row, which is not the design. If one must be added, the logo width
+and link gap have to come down together — check it at 1440px.
+
+The nav is duplicated in each HTML file. Adding or renaming an item means
+editing every page in `src/`. Mark the current page with `aria-current="page"`
+(that attribute, not a class, drives the active styling).
+
+`memory-tree.html` is a detail page reached from `your-memories.html`; it is
+not in the nav, and its "back to the wall" link returns to Your Memories.
 
 ## Git
 
