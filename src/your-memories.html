@@ -82,17 +82,17 @@
 <img alt="" class="scp1" src="assets/img/memories-submit-letter.png" style="width: 100%; height: auto; display: block; transition: transform 220ms;"/>
 </button>
 </div>
-<div style="display: flex; align-items: center; gap: 16px;">
+<div data-record-search="" style="display: flex; align-items: center; gap: 16px;">
 <div style="flex: 0 0 822px; max-width:822px;width:100%; margin-right: auto; display: flex; align-items: stretch; gap: 0px; border: 1px solid var(--rule); border-radius: 5px; background: var(--canvas); overflow: hidden;">
 <div style="display: flex; align-items: center; gap: 10px; flex: 1 1 auto; min-width: 0px; padding: 10px 14px;">
-<input aria-label="Search Final Records by name" autocomplete="off" id="record-search-name" placeholder="Name" style='width: 100%; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 17px; font-weight: 300; color: var(--onbg);' type="text" value=""/>
+<input aria-label="Search Final Records by name" autocomplete="off" data-record-name="" id="record-search-name" placeholder="Name" style='width: 100%; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 17px; font-weight: 300; color: var(--onbg);' type="text" value=""/>
 </div>
 <div style="width: 1px; background: var(--rule);"></div>
 <div style="display: flex; align-items: center; flex: 0 0 190px; padding: 10px 14px;">
 <input aria-label="Date of birth, MM / DD / YYYY" autocomplete="off" id="record-search-date" inputmode="numeric" maxlength="10" placeholder="MM / DD / YYYY" style='width: 100%; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 17px; font-weight: 300; letter-spacing: 0.02em; color: var(--onbg);' type="text" value=""/>
 </div>
-<a class="scp2" href="#" id="record-search-submit" role="button" style='display: flex; align-items: center; padding: 0px 24px; background: var(--head); color: var(--canvas); text-decoration: none; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em;'>SEARCH</a>
-</div><p aria-live="polite" hidden="" id="record-search-status" role="status" style="margin:10px 0 0;font-size:14px;font-weight:300;color:var(--muted);font-family:'Nunito Sans',system-ui,sans-serif"></p>
+<a class="scp2" data-record-submit="" href="#" id="record-search-submit" role="button" style='display: flex; align-items: center; padding: 0px 24px; background: var(--head); color: var(--canvas); text-decoration: none; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em;'>SEARCH</a>
+</div><p aria-live="polite" data-record-status="" hidden="" id="record-search-status" role="status" style="margin:10px 0 0;font-size:14px;font-weight:300;color:var(--muted);font-family:'Nunito Sans',system-ui,sans-serif"></p>
 <div style='display: flex; align-items: baseline; gap: 8px; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 10px; color: var(--muted2);'><span>SORT</span><span style="color: var(--head);">MOST RECENT</span></div>
 </div>
 <div style="column-count: 3; column-gap: 22px;">
@@ -228,13 +228,14 @@
 <p style="margin: 0px; font-size: 14.5px; font-weight: 300; line-height: 1.55; color: rgb(38, 38, 37); text-wrap: pretty;">This is a place to write to someone you miss - a letter, a memory, the thing you never got to say. You can submit letters anonymously or sign your name.</p>
 <p style="margin: 10px 0px 0px; font-size: 14.5px; font-weight: 300; line-height: 1.55; color: rgb(38, 38, 37); text-wrap: pretty;">To write to a specific person, search for their Final Record by name and birth date below. Or browse letters written by others who are missing someone too - filter by relationship.</p>
 </div>
-<div style="padding: 4px 22px 12px;">
+<div data-record-search="" style="padding: 4px 22px 12px;">
 <div style="display: flex; align-items: stretch; border: 1px solid rgb(229, 221, 210); border-radius: 5px; background: rgb(255, 255, 255); overflow: hidden;">
-<input aria-label="Name" placeholder="Name" style='flex: 1 1 auto; min-width: 0px; padding: 13px 14px; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 15px; font-weight: 300; color: rgb(38, 38, 37);' type="text" value=""/>
+<input aria-label="Search Final Records by name" autocomplete="off" data-record-name="" placeholder="Name" style='flex: 1 1 auto; min-width: 0px; padding: 13px 14px; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 15px; font-weight: 300; color: rgb(38, 38, 37);' type="text" value=""/>
 <div style="width: 1px; background: rgb(229, 221, 210);"></div>
 <input aria-label="Date of birth" inputmode="numeric" maxlength="10" placeholder="MM / DD / YYYY" style='flex: 0 0 128px; padding: 13px 12px; border: 0px; outline: none; background: transparent; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 15px; font-weight: 300; color: rgb(38, 38, 37);' type="text" value=""/>
-<a aria-label="Search" class="scp0" href="#" style="flex: 0 0 52px; display: flex; align-items: center; justify-content: center; background: rgb(35, 57, 93); color: rgb(252, 250, 248); font-size: 17px;">→</a>
+<a aria-label="Search" class="scp0" data-record-submit="" href="#" style="flex: 0 0 52px; display: flex; align-items: center; justify-content: center; background: rgb(35, 57, 93); color: rgb(252, 250, 248); font-size: 17px;">→</a>
 </div>
+<p aria-live="polite" data-record-status="" hidden="" role="status" style="margin:8px 0 0;font-size:13.5px;font-weight:300;color:var(--muted);font-family:'Nunito Sans',system-ui,sans-serif"></p>
 </div>
 <div class="swipe-row" style="display: flex; gap: 7px; padding: 0px 22px 10px; overflow-x: auto;">
 <div role="button" style="flex: 0 0 auto; padding: 8px 13px; border-radius: 999px; border: 1px solid rgb(35, 57, 93); background: rgb(35, 57, 93); color: rgb(252, 250, 248); font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: 200ms;"><span class="sc-interp">All</span></div>
