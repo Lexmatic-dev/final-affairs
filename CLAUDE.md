@@ -24,14 +24,29 @@ The pages in `src/` were rebuilt from those bundles into plain static HTML.
 The design system, tokens, markup and copy are carried over faithfully — treat
 the rendered design as the spec and don't restyle it.
 
-## Conventions
+## Responsive
 
-- **Mobile-first CSS.** Mobile layout is the default with no media query;
-  desktop rules go inside `@media (min-width: ...)`.
-- Desktop and mobile are the **same HTML file** with different CSS layouts. Do
-  not create separate mobile files and do not add user-agent detection.
-- The mobile layout may be a completely different arrangement from desktop —
-  it is not a narrowed desktop. Follow whatever the designs in `design/` show.
+Desktop and mobile are the **same HTML file**, switched at **1280px**. No
+separate mobile files, no user-agent detection.
+
+The two designs were authored independently and their content differs — the
+mobile For Funeral Homes and Home are deliberately shorter, and For Attorneys
+is a step wizard on mobile against a single form on desktop. One markup cannot
+serve both, so each page carries both:
+
+- `.fa-only-desktop` — the desktop markup, hidden below 1280px
+- `.fa-only-mobile` — the mobile markup, hidden at 1280px and up
+- `.fa-m-page` — the mobile column, the designs' 375–480px canvas, centred
+
+**A copy change has to be made in both blocks.** That is the cost of running
+two designs; check the other block whenever you edit text.
+
+1280px is where the desktop header stops fitting, so it cannot be moved lower
+without redesigning the header. Between 480px and 1280px the mobile column
+sits centred — there is no tablet design.
+
+- **Mobile-first CSS** inside each block: mobile layout is the default with no
+  media query; desktop rules go inside `@media (min-width: ...)`.
 - Colours, fonts, and spacing are CSS custom properties defined in
   `src/assets/css/base.css`. Reference them with `var()`; never hard-code a hex
   value in a page stylesheet.
@@ -95,6 +110,24 @@ Your Memories as the current nav item:
   "Your Memories"; the earlier "The Memory Tree" name is retired.
 - `final-record.html` — the Final Record for Eleanor Ruth Vance, reached by
   searching her name on the wall.
+
+## Scripts
+
+All in `assets/js/`, all plain, all `defer`red:
+
+- `nav.js` — the mobile drawer: opens, traps focus, closes on Escape, on the
+  scrim, and if the viewport grows past 1280px
+- `deck.js` — the Your Memories card deck on mobile. Nine cards fanned by
+  depth; tap, drag or arrow keys advance. The per-depth transforms are copied
+  from the design, not derived
+- `reveal.js` — scroll reveal on About Us
+- `record-search.js` — Final Record lookup
+
+**Never let CSS hide content pending JavaScript.** `reveal.js` exists because
+the design's reveal CSS parked 28 elements at `opacity: 0` with nothing to
+un-hide them; a third of About Us was invisible for days. The hiding is opt-in
+via a `js-reveal` class the script only adds once it knows it can remove it.
+Apply that pattern to anything similar.
 
 ## Final Record search
 

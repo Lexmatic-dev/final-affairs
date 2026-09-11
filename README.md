@@ -87,8 +87,10 @@ by CSS breakpoints — not separate files and not device sniffing. The mobile
 layout is a genuinely different arrangement that takes over below the
 breakpoint, not a squished desktop.
 
-**Desktop is built. Mobile is not yet** — the mobile designs are still to come,
-and their breakpoint rules will be added to the same files.
+**Both are built.** The switch is at 1280px. Because the two designs differ in
+content, each page carries both markups (`.fa-only-desktop` / `.fa-only-mobile`)
+rather than restyling one into the other — so **a copy change must be made in
+both blocks**.
 
 Page width: the designs were drawn on a 1440px canvas with 100px side padding,
 giving a **1240px content column**. The site reproduces that exactly at 1440px
