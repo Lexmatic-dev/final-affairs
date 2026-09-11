@@ -4,9 +4,9 @@
    Header and footer rules have been removed: every page uses the
    standard components in components.css. */
 
-[data-reveal]{opacity:0;transform:translateY(20px);transition:opacity 760ms cubic-bezier(.22,.61,.36,1),transform 760ms cubic-bezier(.22,.61,.36,1)}
+.js-reveal [data-reveal]{opacity:0;transform:translateY(20px);transition:opacity 760ms cubic-bezier(.22,.61,.36,1),transform 760ms cubic-bezier(.22,.61,.36,1)}
 
-[data-reveal="in"]{opacity:1;transform:translateY(0)}
+.js-reveal [data-reveal="in"]{opacity:1;transform:translateY(0)}
 
 @keyframes faRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
@@ -14,7 +14,7 @@
 
 @keyframes faDraw{from{stroke-dashoffset:var(--fa-dash,140)}to{stroke-dashoffset:0}}
 
-[data-hero]{opacity:0;animation:faRise 900ms cubic-bezier(.22,.61,.36,1) forwards}
+.js-reveal [data-hero]{opacity:0;animation:faRise 900ms cubic-bezier(.22,.61,.36,1) forwards}
 
 [data-soft]{transition:box-shadow 320ms ease,border-color 320ms ease,transform 320ms cubic-bezier(.22,.61,.36,1)}
 
@@ -24,7 +24,7 @@
 
 [data-soft]:hover svg{transform:scale(1.06)}
 
-[data-reveal="in"] [data-line]{transform:scaleX(1)}
+.js-reveal [data-reveal="in"] [data-line]{transform:scaleX(1)}
 
 [data-line]{transform:scaleX(0);transform-origin:left center;transition:transform 900ms 200ms cubic-bezier(.22,.61,.36,1)}
 
