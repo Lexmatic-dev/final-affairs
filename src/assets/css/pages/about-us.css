@@ -1,14 +1,8 @@
 /* about-us.css — page-specific overrides for about-us.html
    Lifted from the approved design. Rules that apply site-wide live in
-   base.css; shared components live in components.css. */
-
-header{padding:20px 56px !important;margin-top:0 !important;background:var(--fa-bone) !important;border:none !important;box-shadow:var(--shadow-header) !important}
-
-header img{height:105px !important;width:auto !important}
-
-header > a:last-child{padding:11px 32px !important;font-size:14px !important}
-
-header nav{position:static !important;left:auto !important;transform:none !important;margin-left:auto !important;margin-right:40px !important}
+   base.css; shared components live in components.css.
+   Header and footer rules have been removed: every page uses the
+   standard components in components.css. */
 
 [data-reveal]{opacity:0;transform:translateY(20px);transition:opacity 760ms cubic-bezier(.22,.61,.36,1),transform 760ms cubic-bezier(.22,.61,.36,1)}
 
@@ -33,19 +27,6 @@ header nav{position:static !important;left:auto !important;transform:none !impor
 [data-reveal="in"] [data-line]{transform:scaleX(1)}
 
 [data-line]{transform:scaleX(0);transform-origin:left center;transition:transform 900ms 200ms cubic-bezier(.22,.61,.36,1)}
-
-/* header nav: quiet underline on hover */
-  header nav a{position:relative;transition:color 220ms ease;font-weight:400 !important}
-
-header nav a[style*="camel"]{font-weight:700 !important}
-
-header nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1.5px;background:var(--fa-camel);transform:scaleX(0);transform-origin:left center;transition:transform 260ms cubic-bezier(.22,.61,.36,1)}
-
-header nav a:hover::after{transform:scaleX(1)}
-
-header > a:last-child, #faFooter a:last-child{transition:background 220ms ease,transform 220ms ease}
-
-header > a:last-child:hover, #faFooter a:last-child:hover{transform:translateY(-1px)}
 
 /* hero: very slow settle of the photograph */
   @keyframes faKen{from{transform:scale(1.045)}to{transform:scale(1)}}
@@ -76,5 +57,4 @@ header > a:last-child:hover, #faFooter a:last-child:hover{transform:translateY(-
   [data-reveal],[data-hero]{opacity:1 !important;transform:none !important;transition:none !important;animation:none !important}
   [data-line]{transform:scaleX(1) !important;transition:none !important}
   [data-ken],[data-drift]{animation:none !important}
-  [data-soft]:hover,[data-pill]:hover{transform:none !important}
-  }
+  [data-soft]:hover,[data-pill]:hover{transform:none !important}}

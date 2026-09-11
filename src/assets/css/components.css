@@ -87,7 +87,10 @@
 .fa-nav {
   display: flex;
   align-items: center;
-  gap: 24px;
+  /* 20px, not the design's 24px: with seven items the header needs 1258px of
+     the 1240px column, so the Log In button overflowed past the content edge
+     on every page. Tightening the nav gap is the least visible way to fit. */
+  gap: 20px;
   margin-left: auto;
   margin-right: 32px;
   font-size: 15px;

@@ -37,6 +37,11 @@ the rendered design as the spec and don't restyle it.
   value in a page stylesheet.
 - CSS load order: `base.css` → `components.css` → `pages/<page>.css`. A rule
   used by more than one page belongs in `components.css`.
+- **Never put `header`/`footer` rules in a page stylesheet.** The exports each
+  carried their own `header img { height: … !important }` overrides; those beat
+  the shared components and left About Us and For Families with differently
+  sized headers. They have all been removed. If a header needs changing it
+  changes in `components.css`, for every page at once.
 - Header, footer and buttons are in `components.css` (`.fa-header`, `.fa-footer`,
   `.fa-btn`). They are CSS translations of the approved design-system
   components — every page uses them, so a change there hits the whole site.
@@ -66,6 +71,12 @@ Your Memories · Contact Us
 
 Footer links — five, deliberately a subset (no Home, no Your Memories):
 About Us · For Families · For Funeral Homes · For Attorneys · Contact Us
+
+The header fits the 1240px column with no room to spare: logo 290px, nav
+749px at a 20px gap, Log In 123px, plus 96px of gaps. The nav gap is 20px
+rather than the design's 24px because seven items otherwise push the Log In
+button past the content edge. Adding an eighth nav item needs the logo or the
+gap to come down again — check the button lands exactly on the column edge.
 
 **Don't add a sixth footer link.** The footer row is logo + links + Log In on
 one line; a sixth link overflows the 1240px column and wraps the links onto

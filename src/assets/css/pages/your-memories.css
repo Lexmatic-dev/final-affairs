@@ -28,8 +28,3 @@
 a { color: #23395D; }
   a:hover { color: #BE9C71; }
   * { box-sizing: border-box; }
-  header img { height: 96px !important; }
-  header nav a:not(:nth-child(5)) { font-weight: 400 !important; }
-  header nav { position: static !important; transform: none !important; margin-left: auto !important; margin-right: 32px !important; }
-  footer img { height: 84px !important; }
-  footer > div:first-child { height: auto !important; }

@@ -6,19 +6,21 @@
   color: #262625;
 }
 
-a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified-badge]:hover>span,[data-verified-badge]:focus>span,[data-verified-badge]:focus-within>span{opacity:1!important;visibility:visible!important}
-
 /* --------------------------------------------------------------------------
+   Contained layout
+
    The record sits in the same 1240px column as every other page rather than
-   running edge to edge. The indigo sidebar keeps its own colour; it is the
-   sheet as a whole that is contained, so page background shows down both
-   sides. Header and footer stay full-width bars and are untouched.
+   running edge to edge, using the same gutter formula as .fa-bleed, so page
+   background shows down both sides. The full-width bars above and below the
+   record manage their own gutters and are left alone.
    -------------------------------------------------------------------------- */
 .fa-record__sheet {
   max-width: var(--fa-content, 1240px);
   margin-inline: max(var(--fa-gutter-min, 100px),
                      calc((100% - var(--fa-content, 1240px)) / 2));
 }
+
+a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified-badge]:hover>span,[data-verified-badge]:focus>span,[data-verified-badge]:focus-within>span{opacity:1!important;visibility:visible!important}
 
 /* --------------------------------------------------------------------------
    Family tree
@@ -35,4 +37,22 @@ a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified
    -------------------------------------------------------------------------- */
 .fa-record__tree {
   zoom: 0.8125; /* 676 / 832 */
+}
+
+/* --------------------------------------------------------------------------
+   "Eighty years, in moments" timeline
+
+   Exported at a fixed 872px wide and 974px tall, sized for the 1440px canvas.
+   With 72px padding either side that is 1016px, which does not fit the
+   contained layout's 820px column — it was overflowing by 196px and being
+   clipped, so the right-hand entries were cut off rather than merely
+   misaligned.
+
+   Its inner grid is repeat(4, minmax(0, 1fr)), so it reflows perfectly well
+   once the fixed dimensions are released. No scaling needed here.
+   -------------------------------------------------------------------------- */
+.fa-record__timeline {
+  /* !important because the export sets these as inline styles on the element */
+  width: auto !important;
+  height: auto !important;
 }

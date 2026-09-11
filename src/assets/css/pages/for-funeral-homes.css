@@ -1,7 +1,6 @@
 /* for-funeral-homes.css — page-specific overrides for for-funeral-homes.html
    Lifted from the approved design. Rules that apply site-wide live in
-   base.css; shared components live in components.css. */
+   base.css; shared components live in components.css.
+   Header and footer rules have been removed: every page uses the
+   standard components in components.css. */
 
-header nav a{font-weight:400 !important}
-
-header nav a.active{font-weight:700 !important}
