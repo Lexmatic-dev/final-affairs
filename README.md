@@ -46,7 +46,7 @@ final-affairs/
 │   ├── for-funeral-homes.html
 │   ├── for-attorneys.html
 │   ├── your-memories.html      ← the memories wall
-│   ├── memory-tree.html        ← single-note detail, linked from the wall
+│   ├── your-memories-note.html ← single-note detail, linked from the wall
 │   ├── final-record.html       ← Eleanor Ruth Vance, found via wall search
 │   ├── contact-us.html
 │   └── assets/

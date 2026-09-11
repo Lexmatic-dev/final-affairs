@@ -15,8 +15,10 @@ build step, no package manager, no dependencies.
   CSS organisation, and breakpoints.
 
 Note: `design/desktop/your memories desktop .html` is a design *canvas* holding
-two artboards — the Your Memories wall and the Memory Tree detail page — which
-became two separate pages in `src/`.
+two artboards — the wall and the single-note detail view — which became
+`your-memories.html` and `your-memories-note.html`. The detail artboard is
+headed "The Memory Tree" in the export; that name is retired, and the built
+page reads "Your Memories".
 
 The pages in `src/` were rebuilt from those bundles into plain static HTML.
 The design system, tokens, markup and copy are carried over faithfully — treat
@@ -77,8 +79,9 @@ editing every page in `src/`. Mark the current page with `aria-current="page"`
 Three pages sit under Your Memories and are not in the nav. All three mark
 Your Memories as the current nav item:
 
-- `memory-tree.html` — a single shared note, reached from the wall; its
-  "back to the wall" link returns to `your-memories.html`.
+- `your-memories-note.html` — a single shared note, reached from the wall;
+  its "back to the wall" link returns to `your-memories.html`. Headed
+  "Your Memories"; the earlier "The Memory Tree" name is retired.
 - `final-record.html` — the Final Record for Eleanor Ruth Vance, reached by
   searching her name on the wall.
 
