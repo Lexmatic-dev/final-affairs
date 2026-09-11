@@ -304,3 +304,179 @@
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
+
+/* ==========================================================================
+   RESPONSIVE — mobile layout below 1280px
+   ==========================================================================
+
+   The desktop header needs 1258px of content width (logo 290 + nav 749 +
+   Log In 123 + 96 of gaps), so it cannot survive a narrow viewport. Below
+   1280px the site switches to the mobile designs: a sticky bar with a
+   hamburger, and a right-hand drawer.
+
+   Both markups ship in every page and one is hidden. The mobile designs are
+   separately authored — different copy and, on For Attorneys, a different
+   form entirely — so a single markup cannot serve both.
+   ========================================================================== */
+
+:root {
+  --fa-bp-desktop: 1280px;
+}
+
+/* Mobile chrome is hidden on desktop */
+.fa-header-m,
+.fa-drawer { display: none; }
+
+/* --------------------------------------------------------------------------
+   Mobile header — sticky bar, logo left, hamburger right
+   -------------------------------------------------------------------------- */
+.fa-header-m {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--fa-bone);
+  height: 84px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.fa-header-m__logo { display: flex; align-items: center; text-decoration: none; }
+.fa-header-m__logo img { height: 80px; width: auto; display: block; }
+
+.fa-burger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.fa-burger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--fa-indigo);
+}
+
+/* --------------------------------------------------------------------------
+   Nav drawer
+   -------------------------------------------------------------------------- */
+.fa-drawer[hidden] { display: none; }
+
+.fa-drawer__scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(38, 38, 37, 0.48);
+  z-index: 200;
+  animation: fa-fade-in 200ms ease;
+}
+
+.fa-drawer__panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box; /* padding must not widen the 288px panel */
+  width: 288px;
+  max-width: 86vw;
+  background: var(--fa-bone);
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  padding: 0 28px 40px;
+  overflow-y: auto;
+  animation: fa-slide-in 220ms ease;
+  box-shadow: -4px 0 32px rgba(35, 57, 93, 0.13);
+}
+
+.fa-drawer__close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 12px 0 28px;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fa-drawer__panel a[data-nav] {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--fa-charcoal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--fa-border);
+}
+.fa-drawer__panel a[data-nav]:last-of-type { border-bottom: none; }
+.fa-drawer__panel a[aria-current='page'] {
+  font-weight: 700;
+  color: var(--fa-indigo);
+}
+.fa-drawer__action { margin-top: auto; padding-top: 24px; }
+.fa-drawer__action .fa-btn { width: 100%; display: block; }
+
+@keyframes fa-fade-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fa-slide-in { from { transform: translateX(100%); } to { transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-drawer__scrim,
+  .fa-drawer__panel { animation: none; }
+}
+
+/* --------------------------------------------------------------------------
+   The switch
+   -------------------------------------------------------------------------- */
+@media (max-width: 1279px) {
+  .fa-header,
+  .fa-footer__top,
+  .fa-only-desktop { display: none; }
+
+  .fa-header-m { display: flex; }
+  .fa-drawer:not([hidden]) { display: block; }
+  .fa-only-mobile { display: block; }
+
+  /* Mobile footer: centred logo, wrapped links, note beneath */
+  .fa-footer__m {
+    display: block;
+    background: var(--fa-bone);
+    border-top: 1px solid var(--fa-rule);
+    padding: 36px 24px 40px;
+  }
+  .fa-footer__m-logo { display: flex; justify-content: center; margin-bottom: 28px; }
+  .fa-footer__m-logo img { width: 240px; height: auto; display: block; }
+  .fa-footer__m-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 22px;
+    margin-bottom: 24px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .fa-footer__m-links a { color: var(--fa-indigo); text-decoration: none; }
+  .fa-footer__note { padding-inline: 0; font-size: 13px; line-height: 1.75; }
+}
+
+@media (min-width: 1280px) {
+  .fa-footer__m { display: none; }
+  .fa-only-mobile { display: none; }
+  .fa-only-desktop { display: block; }
+}
+
+/* Never let the drawer stay open on desktop */
+@media (min-width: 1280px) {
+  .fa-drawer { display: none !important; }
+}
