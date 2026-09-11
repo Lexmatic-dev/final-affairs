@@ -19,3 +19,20 @@ a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified
   margin-inline: max(var(--fa-gutter-min, 100px),
                      calc((100% - var(--fa-content, 1240px)) / 2));
 }
+
+/* --------------------------------------------------------------------------
+   Family tree
+
+   The tree is a fixed-geometry diagram: its rows are 832px and the connector
+   lines between cards are absolutely positioned at hard pixel offsets within
+   that width. Letting the rows shrink would leave the lines pointing at
+   nothing, so the tree scales as a single unit instead.
+
+   It was drawn against the 1440px canvas, where this column was wide enough.
+   In the contained 1240px layout the column is narrower, so the tree is
+   scaled down to fit. `zoom` is used rather than `transform: scale()` because
+   it scales layout too — no phantom overflow and no leftover vertical gap.
+   -------------------------------------------------------------------------- */
+.fa-record__tree {
+  zoom: 0.8125; /* 676 / 832 */
+}
