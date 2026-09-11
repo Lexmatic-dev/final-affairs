@@ -39,47 +39,67 @@ Then open <http://localhost:8000>.
 
 ```
 final-affairs/
-├── src/                  ← THE WEBSITE. This is what gets deployed.
-│   ├── index.html
+├── src/                        ← THE WEBSITE. This is what gets deployed.
+│   ├── index.html              ← Home
+│   ├── about-us.html
+│   ├── for-families.html
+│   ├── for-funeral-homes.html
+│   ├── for-attorneys.html
+│   ├── your-memories.html      ← placeholder, awaiting design
+│   ├── contact-us.html
 │   └── assets/
-│       ├── css/          ← stylesheets
-│       ├── js/           ← scripts
-│       ├── img/          ← images, SVGs, logos
-│       └── fonts/        ← self-hosted webfonts
+│       ├── css/
+│       │   ├── base.css        ← fonts + design tokens
+│       │   ├── components.css  ← header, footer, buttons, page shell
+│       │   └── pages/          ← per-page overrides
+│       ├── img/
+│       └── fonts/              ← Nunito Sans, self-hosted
 │
-├── design/               ← Reference only. NOT deployed.
-│   ├── desktop/          ← original desktop design exports
-│   └── mobile/           ← original mobile design exports
+├── design/                     ← Reference only. NOT deployed.
+│   ├── desktop/                ← original Claude Design exports
+│   └── mobile/                 ← (mobile designs go here)
 │
-├── docs/                 ← How we work
-│   ├── workflow.md       ← git workflow — read this first if git is new to you
-│   └── structure.md      ← naming rules and where things go
+├── docs/
+│   ├── workflow.md             ← git workflow — read first if git is new to you
+│   └── structure.md            ← naming rules and where things go
 │
-└── .github/              ← PR template and (later) CI
+└── .github/
 ```
 
 **The one rule that matters:** `src/` is the live site. `design/` is the
 original artwork we're building from. Never edit `design/` to change the
 website, and never point the site at a file inside `design/`.
 
+The files in `design/desktop/` are self-extracting React bundles — several MB
+each, with the real content packed inside. They render in a browser but are
+not editable source. The pages in `src/` were rebuilt from them into plain
+HTML, preserving the design system, markup and copy.
+
 ---
 
 ## Responsive approach
 
 Desktop and mobile are the **same pages** with **different layouts**, swapped
-by CSS breakpoints — not separate files and not device sniffing.
+by CSS breakpoints — not separate files and not device sniffing. The mobile
+layout is a genuinely different arrangement that takes over below the
+breakpoint, not a squished desktop.
 
-The mobile design is not a squished desktop. It's a genuinely different layout
-that takes over below the breakpoint. Both designs are preserved exactly as
-drawn; they just live in one file per page.
+**Desktop is built. Mobile is not yet** — the mobile designs are still to come,
+and their breakpoint rules will be added to the same files.
 
-Why this way:
-- Copy and content exist in one place, so a text change is made once, not twice.
-- One URL per page — better for SEO, sharing, and analytics.
-- Resizing a desktop browser window behaves correctly.
-- No user-agent detection, which misfires on tablets and "Request Desktop Site."
+Page width: the designs were drawn on a 1440px canvas with 100px side padding,
+giving a **1240px content column**. The site reproduces that exactly at 1440px
+and holds the 1240px column on wider screens while full-bleed backgrounds
+reach the screen edge.
 
-See [`docs/structure.md`](docs/structure.md) for the breakpoint values.
+| Viewport | Content column | Side gutter |
+|---------:|---------------:|------------:|
+|   1280px |         1080px |       100px |
+|   1440px |         1240px |       100px |
+|   1920px |         1240px |       340px |
+|   2560px |         1240px |       660px |
+
+See [`docs/structure.md`](docs/structure.md) for details.
 
 ---
 

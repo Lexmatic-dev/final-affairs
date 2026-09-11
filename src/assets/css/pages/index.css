@@ -1,0 +1,19 @@
+/* index.css — page-specific overrides for index.html
+   Lifted from the approved design. Rules that apply site-wide live in
+   base.css; shared components live in components.css. */
+
+#faCtaBand p{max-width:none !important;white-space:nowrap}
+
+#faFamiliesBtn a{border-color:transparent !important}
+
+#faCtaBand img{width:248px !important;height:248px !important;opacity:.03 !important;right:140px !important}
+
+@keyframes wmUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+
+@keyframes wmRuleY { from { transform:scaleY(0); } to { transform:scaleY(1); } }
+
+@keyframes wmSlide { from { opacity:0; transform:translateX(-10px); } to { opacity:1; transform:none; } }
+
+@keyframes wmDot { from { opacity:0; transform:scale(.4); } to { opacity:1; transform:none; } }
+
+@keyframes wmReveal { from { opacity:0; clip-path:inset(0 0 22% 0); transform:scale(1.04); } to { opacity:1; clip-path:inset(0 0 0 0); transform:none; } }

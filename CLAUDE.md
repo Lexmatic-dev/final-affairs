@@ -6,12 +6,17 @@ build step, no package manager, no dependencies.
 ## Layout
 
 - `src/` — the deployed website. HTML pages at the top level, assets in
-  `src/assets/{css,js,img,fonts}/`.
-- `design/` — original design exports for reference. **Never deployed and never
-  referenced by `src/`.** Don't edit these to change the site, and don't point
-  the site at files inside this folder.
+  `src/assets/{css,img,fonts}/`.
+- `design/` — original Claude Design exports, kept for reference. These are
+  self-extracting React bundles (multi-MB, content packed in a base64
+  manifest), **not** editable source. **Never deployed and never referenced by
+  `src/`.** To change the site, edit `src/`; never edit `design/`.
 - `docs/` — team conventions. `structure.md` is the authority on naming,
   CSS organisation, and breakpoints.
+
+The pages in `src/` were rebuilt from those bundles into plain static HTML.
+The design system, tokens, markup and copy are carried over faithfully — treat
+the rendered design as the spec and don't restyle it.
 
 ## Conventions
 
@@ -26,6 +31,15 @@ build step, no package manager, no dependencies.
   value in a page stylesheet.
 - CSS load order: `base.css` → `components.css` → `pages/<page>.css`. A rule
   used by more than one page belongs in `components.css`.
+- Header, footer and buttons are in `components.css` (`.fa-header`, `.fa-footer`,
+  `.fa-btn`). They are CSS translations of the approved design-system
+  components — every page uses them, so a change there hits the whole site.
+- Page width: the designs were drawn on a 1440px canvas with 100px side
+  padding, i.e. a **1240px content column**. `.fa-bleed` reproduces that with
+  `padding-inline: max(100px, calc((100% - 1240px) / 2))`, which is exactly
+  100px at 1440px wide and grows beyond it, so backgrounds reach the screen
+  edge while content stays at 1240px. Use `.fa-bleed` for full-width sections;
+  don't hard-code a 1440px wrapper.
 - Filenames: lowercase with dashes. No spaces, no capitals.
 
 ## Accessibility
@@ -34,6 +48,19 @@ Applies to all generated markup: every `<img>` needs `alt` (empty for
 decorative), headings descend without skipping levels, interactive elements are
 `<button>`/`<a>` rather than `<div>`, form inputs have real `<label>`s, and body
 text meets 4.5:1 contrast.
+
+## Navigation
+
+Seven pages, in this order, on every page:
+Home · About Us · For Families · For Funeral Homes · For Attorneys ·
+Your Memories · Contact Us
+
+The nav is duplicated in each HTML file. Adding or renaming an item means
+editing every page in `src/` plus the footer link list — change all of them
+together. Mark the current page with `aria-current="page"` (that attribute,
+not a class, drives the active styling).
+
+`your-memories.html` is an intentional placeholder awaiting its design.
 
 ## Git
 

@@ -1,0 +1,303 @@
+/* ==========================================================================
+   components.css — Final Affairs
+   Shared pieces used on more than one page: page shell, site header,
+   site footer, buttons.
+
+   These are faithful CSS translations of the approved design system
+   components (SiteHeader, SiteFooter, Button). Values match the originals
+   exactly — change them only alongside a design decision.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Page shell
+
+   The designs were drawn on a fixed 1440px canvas with 100px side padding,
+   which yields a 1240px content column. We keep that column exactly, but
+   let the page itself fill the viewport so full-bleed backgrounds reach the
+   screen edges on wide monitors instead of stopping at 1440px.
+
+   --gutter resolves to exactly 100px at 1440px wide, so nothing shifts at
+   the width the designs were drawn at.
+   -------------------------------------------------------------------------- */
+:root {
+  --fa-content: 1240px;
+  --fa-gutter-min: 100px;
+}
+
+.fa-page {
+  width: 100%;
+  background: var(--fa-bone);
+  font-family: 'Nunito Sans', sans-serif;
+  color: var(--fa-charcoal);
+  overflow-x: clip;
+}
+
+/* Centres a 1240px column, never less than the designed side padding. */
+.fa-bleed {
+  padding-inline: max(var(--fa-gutter-min), calc((100% - var(--fa-content)) / 2));
+}
+
+.fa-container {
+  max-width: var(--fa-content);
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Site header
+   Matches the For Attorneys header: bone bar, 94px logo, nav pushed right,
+   steel action pill. The homepage uses the --overlay variant, which is the
+   same bar sitting transparently over the hero image.
+   -------------------------------------------------------------------------- */
+.fa-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 0;
+  padding-block: 30px 26px;
+  padding-inline: max(var(--fa-gutter-min), calc((100% - var(--fa-content)) / 2));
+  background: var(--fa-bone);
+}
+
+.fa-header--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background: transparent;
+}
+
+.fa-header__logo {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.fa-header__logo img {
+  height: 94px;
+  width: auto;
+  display: block;
+}
+
+.fa-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: auto;
+  margin-right: 32px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.fa-nav a {
+  color: var(--fa-charcoal);
+  font-weight: 400;
+  text-decoration: none;
+  transition: color var(--dur, 220ms) var(--ease, ease);
+}
+
+.fa-nav a:hover {
+  color: var(--fa-camel);
+}
+
+.fa-nav a[aria-current='page'] {
+  color: var(--fa-camel);
+  font-weight: 700;
+}
+
+.fa-header__action {
+  flex: none;
+  background: var(--fa-steel);
+  border: 1.5px solid var(--fa-steel);
+  color: var(--fa-bone);
+  padding: 11px 32px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: var(--ls-button);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background var(--dur, 220ms) var(--ease, ease);
+}
+
+.fa-header__action:hover {
+  background: var(--fa-steel-600);
+  border-color: var(--fa-steel-600);
+  color: var(--fa-bone);
+}
+
+/* --------------------------------------------------------------------------
+   Site footer
+   -------------------------------------------------------------------------- */
+.fa-footer {
+  background: var(--fa-bone);
+  border-top: var(--border-hair);
+}
+
+.fa-footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  padding-block: 52px 28px;
+  padding-inline: max(var(--fa-gutter-min), calc((100% - var(--fa-content)) / 2));
+}
+
+.fa-footer__logo {
+  flex: none;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fa-footer__logo img {
+  width: 320px;
+  height: auto;
+  display: block;
+}
+
+.fa-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 40px;
+  row-gap: 16px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.fa-footer__links a {
+  color: var(--fa-indigo);
+  text-decoration: none;
+}
+
+.fa-footer__links a:hover {
+  color: var(--fa-camel);
+}
+
+.fa-footer__action {
+  background: var(--fa-steel);
+  color: #ffffff;
+  padding: 9px 26px;
+  border-radius: 5px;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 220ms ease;
+}
+
+.fa-footer__action:hover {
+  background: var(--fa-steel-600);
+  color: #ffffff;
+}
+
+.fa-footer__note {
+  padding-block: 0 44px;
+  padding-inline: max(var(--fa-gutter-min), calc((100% - var(--fa-content)) / 2));
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 300;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons — four brand variants plus an outline, three sizes.
+   -------------------------------------------------------------------------- */
+.fa-btn {
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: var(--ls-button);
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  border-style: solid;
+  border-width: var(--border-btn);
+  cursor: pointer;
+  transition: var(--transition-btn);
+  padding: 15px 40px;
+  font-size: 15px;
+}
+
+.fa-btn--sm { padding: 10px 26px; font-size: 13px; }
+.fa-btn--lg { padding: 17px 48px; font-size: 16px; }
+.fa-btn--full { display: block; width: 100%; }
+
+.fa-btn--primary {
+  background: var(--fa-indigo);
+  border-color: var(--fa-indigo);
+  color: var(--fa-bone);
+}
+.fa-btn--primary:hover {
+  background: var(--fa-indigo-800);
+  border-color: var(--fa-indigo-800);
+  color: var(--fa-bone);
+}
+
+.fa-btn--accent {
+  background: var(--fa-camel);
+  border-color: var(--fa-camel);
+  color: var(--fa-bone);
+}
+.fa-btn--accent:hover {
+  background: var(--fa-camel-600);
+  border-color: var(--fa-camel-600);
+  color: var(--fa-bone);
+}
+
+.fa-btn--secondary {
+  background: var(--fa-steel);
+  border-color: var(--fa-steel);
+  color: var(--fa-bone);
+}
+.fa-btn--secondary:hover {
+  background: var(--fa-steel-600);
+  border-color: var(--fa-steel-600);
+  color: var(--fa-bone);
+}
+
+.fa-btn--outline {
+  background: var(--fa-bone);
+  border-color: var(--fa-indigo);
+  color: var(--fa-indigo);
+}
+.fa-btn--outline:hover {
+  background: var(--fa-indigo);
+  border-color: var(--fa-indigo);
+  color: var(--fa-bone);
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility
+   -------------------------------------------------------------------------- */
+.fa-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--fa-indigo);
+  color: var(--fa-bone);
+  padding: 12px 20px;
+  border-radius: 0 0 6px 0;
+  font-weight: 700;
+  text-decoration: none;
+}
+.fa-skip-link:focus {
+  left: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}

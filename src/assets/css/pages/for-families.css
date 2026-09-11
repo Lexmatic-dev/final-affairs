@@ -1,0 +1,31 @@
+/* for-families.css — page-specific overrides for for-families.html
+   Lifted from the approved design. Rules that apply site-wide live in
+   base.css; shared components live in components.css. */
+
+* { box-sizing: border-box; }
+
+.fa-textlink { color: var(--fa-indigo); font-weight: 700; font-size: 16px; letter-spacing: 0.3px; }
+
+.fa-textlink:hover { color: var(--fa-camel); }
+
+details > summary { list-style: none; cursor: pointer; }
+
+details > summary::-webkit-details-marker { display: none; }
+
+details[open] > summary [data-plus] { transform: rotate(45deg); }
+
+details[open] > summary [data-q] { color: var(--fa-camel); }
+
+header > a > img { height: 124px !important; }
+
+header { padding-top: 46px !important; }
+
+footer img { height: 96px !important; }
+
+footer > div:first-child > div:first-child { height: auto !important; overflow: visible !important; }
+
+footer > div:first-child { padding: 36px 100px 16px !important; margin-top: 0; }
+
+footer > div:last-child { padding: 0 100px 40px !important; margin-top: 0; }
+
+footer > div:first-child > div:last-child { flex: 1 1 auto; justify-content: flex-end !important; }
