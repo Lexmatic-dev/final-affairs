@@ -480,3 +480,26 @@
 @media (min-width: 1280px) {
   .fa-drawer { display: none !important; }
 }
+
+/* --------------------------------------------------------------------------
+   Mobile page frame
+
+   The mobile designs were drawn on a 375–480px canvas and centre themselves.
+   Keep that: below the breakpoint the page is a single fluid column capped at
+   480px, so it reads correctly on a phone and sits centred on a tablet.
+   -------------------------------------------------------------------------- */
+.fa-m-page {
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+  background: var(--fa-bone);
+  font-family: 'Nunito Sans', sans-serif;
+  color: var(--fa-charcoal);
+}
+
+.fa-m-page img { max-width: 100%; height: auto; }
+
+/* The exports pin a 375px floor; let it go narrower so small phones
+   (e.g. iPhone SE at 320px) don't scroll sideways. */
+.fa-m-page,
+.fa-m-page * { min-width: 0 !important; }
