@@ -77,10 +77,10 @@
 <p style='margin: 0px; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 19px; font-weight: 300; line-height: 1.62; color: var(--ink); text-wrap: pretty;'>This is a place to write to someone you miss - a letter, a memory, the thing you never got to say. <br/>You can submit letters anonymously or sign your name if you'd like. </p>
 <p style='margin: 0px; font-family: "Nunito Sans", system-ui, sans-serif; font-size: 19px; font-weight: 300; line-height: 1.62; color: var(--ink); text-wrap: pretty;'>To write to a specific person, search for their Final Record by name and birth date below. Or browse letters written by others who are missing someone too - filter by relationship in the panel on the left.</p>
 </div>
-<div role="button" style="flex: 0 0 220px; margin-right: 0px; margin-top: 37px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; cursor: pointer;" tabindex="0">
+<button class="fa-letter-trigger" data-letter-open="" style="flex: 0 0 220px; margin-right: 0px; margin-top: 37px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; cursor: pointer;" type="button">
 <div style='font-family: "Nunito Sans", system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(190, 156, 113); text-align: center;'>Click the envelope to submit a letter</div>
-<img alt="Submit a letter" class="scp1" src="assets/img/memories-submit-letter.png" style="width: 100%; height: auto; display: block; transition: transform 220ms;"/>
-</div>
+<img alt="" class="scp1" src="assets/img/memories-submit-letter.png" style="width: 100%; height: auto; display: block; transition: transform 220ms;"/>
+</button>
 </div>
 <div style="display: flex; align-items: center; gap: 16px;">
 <div style="flex: 0 0 822px; max-width:822px;width:100%; margin-right: auto; display: flex; align-items: stretch; gap: 0px; border: 1px solid var(--rule); border-radius: 5px; background: var(--canvas); overflow: hidden;">
@@ -328,9 +328,62 @@
 </div>
 </div>
 <div class="fa-m-actionbar" style="    padding: 14px 22px 26px; background: rgb(252, 250, 248); border-top: 1px solid rgb(229, 221, 210); display: flex; align-items: center; gap: 12px; z-index: 30;">
-<div class="scp1" role="button" style="flex: 1 1 0%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 17px; border-radius: 5px; background: rgb(35, 57, 93); color: rgb(252, 250, 248); font-size: 11.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 220ms;">Write a letter</div>
+<button class="scp1 fa-letter-trigger" data-letter-open="" style="flex: 1 1 0%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 17px; border-radius: 5px; background: rgb(35, 57, 93); color: rgb(252, 250, 248); font-size: 11.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 220ms;" type="button">Write a letter</button>
 </div>
 </div></div></main>
+<div class="fa-letter" hidden id="fa-letter">
+<div class="fa-letter__scrim" data-letter-close=""></div>
+<div aria-labelledby="fa-letter-title" aria-modal="true" class="fa-letter__panel" role="dialog">
+<button aria-label="Close" class="fa-letter__close" data-letter-close="" type="button">&#215;</button>
+<form class="fa-letter__form" novalidate="">
+<div class="fa-letter__eyebrow">Unsent words</div>
+<h2 class="fa-letter__title" id="fa-letter-title">Write a letter</h2>
+<p class="fa-letter__lead">Say what you never could. Your letter is written onto paper and shared anonymously unless you sign it.</p>
+<div class="fa-letter__rule"></div>
+<div class="fa-letter__fields">
+<div class="fa-letter__field">
+<label class="fa-letter__label" for="fa-letter-to">To</label>
+<input aria-describedby="fa-letter-to-hint" autocomplete="off" class="fa-letter__input" id="fa-letter-to" name="to" placeholder="Their name" required="" type="text"/>
+<div class="fa-letter__hint" id="fa-letter-to-hint">Who is this letter for?</div>
+</div>
+<div class="fa-letter__field">
+<label class="fa-letter__label" for="fa-letter-relationship">Relationship</label>
+<select class="fa-letter__input" id="fa-letter-relationship" name="relationship">
+<option value="">Select one</option>
+<option value="Grandmother">Grandmother</option>
+<option value="Grandfather">Grandfather</option>
+<option value="Mother">Mother</option>
+<option value="Father">Father</option>
+<option value="Sister">Sister</option>
+<option value="Brother">Brother</option>
+<option value="Best friend">Best friend</option>
+<option value="Friend">Friend</option>
+</select>
+</div>
+<div class="fa-letter__field">
+<label class="fa-letter__label" for="fa-letter-from">From <span class="fa-letter__optional">(optional)</span></label>
+<input aria-describedby="fa-letter-from-hint" autocomplete="off" class="fa-letter__input" id="fa-letter-from" name="from" placeholder="Your name" type="text"/>
+<div class="fa-letter__hint" id="fa-letter-from-hint">Sign your letter, or leave blank to stay anonymous.</div>
+</div>
+<div class="fa-letter__field">
+<label class="fa-letter__label" for="fa-letter-body">Your unsent words</label>
+<textarea aria-describedby="fa-letter-count" class="fa-letter__input fa-letter__textarea" id="fa-letter-body" name="body" placeholder="The things you never got to say&#8230;" required="" rows="5"></textarea>
+<div aria-live="polite" class="fa-letter__count" id="fa-letter-count">0 / 25 words</div>
+</div>
+</div>
+<div class="fa-letter__actions">
+<button class="fa-letter__cancel" data-letter-close="" type="button">Cancel</button>
+<button class="fa-letter__submit" type="submit">Submit letter</button>
+</div>
+</form>
+<div class="fa-letter__sent" hidden="">
+<div class="fa-letter__eyebrow">Received</div>
+<h2 class="fa-letter__title" id="fa-letter-sent-title">Your letter is on its way</h2>
+<p class="fa-letter__lead">We write it onto paper by hand and add it to the wall within a few days.</p>
+<button class="fa-letter__submit" data-letter-close="" type="button">Back to the wall</button>
+</div>
+</div>
+</div>
 <footer class="fa-footer">
 <div class="fa-footer__top">
 <div class="fa-footer__logo"><img alt="Final Affairs" src="assets/img/logo-footer.png"/></div>
@@ -356,5 +409,5 @@
 </div><p class="fa-footer__note">© Final Affairs. Guidance before and after a loss. Final Affairs is a technology and administrative-support company, not a law firm, and does not provide legal advice; legal advice and legal services are provided by independent licensed attorneys. Visiting or using this website does not create an attorney-client relationship; that relationship is formed only when you enter into a written engagement agreement with an attorney.</p>
 </footer>
 </div>
-<script defer="" src="assets/js/record-search.js"></script><script defer="" src="assets/js/nav.js"></script><script defer="" src="assets/js/deck.js"></script></body>
+<script defer="" src="assets/js/record-search.js"></script><script defer="" src="assets/js/nav.js"></script><script defer="" src="assets/js/deck.js"></script><script defer="" src="assets/js/letter.js"></script></body>
 </html>
