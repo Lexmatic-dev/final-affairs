@@ -15,8 +15,6 @@
 (function () {
   'use strict';
 
-  var HEADER = 84; /* .fa-header-m is sticky and this tall; the strip sits under it */
-
   function each(list, fn) { Array.prototype.forEach.call(list, fn); }
 
   function init() {
@@ -40,7 +38,7 @@
     });
     if (!tabEls.length || panels.indexOf(null) !== -1) return;
 
-    function activate(i, scroll) {
+    function activate(i) {
       tabEls.forEach(function (t, j) {
         var on = i === j;
         t.setAttribute('aria-selected', on ? 'true' : 'false');
@@ -54,11 +52,8 @@
         list.scrollLeft += r.left - l.left - (l.width - r.width) / 2;
       }
 
-      /* The portrait stays put above the strip; bring the strip up under
-         the header so the new chapter starts in view. */
-      if (!scroll) return;
-      var top = list.getBoundingClientRect().top + window.pageYOffset - HEADER;
-      window.scrollTo(0, Math.max(0, top));
+      /* The page itself stays where it is; only the chapter under the
+         strip changes. */
     }
 
     function fromHash() {
@@ -70,7 +65,7 @@
     }
 
     function go(i) {
-      activate(i, true);
+      activate(i);
       tabEls[i].focus();
       if (window.history && window.history.replaceState) {
         window.history.replaceState(null, '', '#' + panels[i].id);
@@ -99,11 +94,11 @@
 
     window.addEventListener('hashchange', function () {
       var i = fromHash();
-      if (i !== -1) activate(i, true);
+      if (i !== -1) activate(i);
     });
 
     var start = fromHash();
-    activate(start === -1 ? 0 : start, false);
+    activate(start === -1 ? 0 : start);
   }
 
   /* ---- Expand / collapse rows ------------------------------------------- */
