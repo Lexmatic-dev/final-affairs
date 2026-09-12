@@ -39,7 +39,6 @@
       return document.getElementById(t.getAttribute('aria-controls'));
     });
     if (!tabEls.length || panels.indexOf(null) !== -1) return;
-    var hero = root.querySelector('.fa-rm-hero');
 
     function activate(i, scroll) {
       tabEls.forEach(function (t, j) {
@@ -48,9 +47,6 @@
         t.tabIndex = on ? 0 : -1;
         panels[j].hidden = !on;
       });
-      /* The portrait only heads the first chapter, as in the design. */
-      if (hero) hero.hidden = i !== 0;
-
       /* Keep the chosen tab in view along the strip. */
       var r = tabEls[i].getBoundingClientRect();
       var l = list.getBoundingClientRect();
@@ -58,8 +54,9 @@
         list.scrollLeft += r.left - l.left - (l.width - r.width) / 2;
       }
 
+      /* The portrait stays put above the strip; bring the strip up under
+         the header so the new chapter starts in view. */
       if (!scroll) return;
-      if (i === 0) { window.scrollTo(0, 0); return; }
       var top = list.getBoundingClientRect().top + window.pageYOffset - HEADER;
       window.scrollTo(0, Math.max(0, top));
     }
