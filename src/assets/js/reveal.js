@@ -18,8 +18,22 @@
 
   root.classList.add('js-reveal');
 
+  /* The mission headline rises a word at a time. Each word waits on an `on`
+     class; without it the whole statement stays at opacity 0, so every
+     typewriter that gets hidden must also get played. */
+  function play(tw) {
+    tw.querySelectorAll('[data-w]').forEach(function (w, i) {
+      window.setTimeout(function () { w.classList.add('on'); }, i * 55);
+    });
+  }
+
+  function show(el) {
+    if (el.hasAttribute('data-typewriter')) play(el);
+    else el.setAttribute('data-reveal', 'in');
+  }
+
   function start() {
-    var targets = document.querySelectorAll('[data-reveal]');
+    var targets = document.querySelectorAll('[data-reveal], [data-typewriter]');
     if (!targets.length) { root.classList.remove('js-reveal'); return; }
 
     var io;
@@ -27,7 +41,7 @@
       io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        entry.target.setAttribute('data-reveal', 'in');
+        show(entry.target);
         io.unobserve(entry.target);
       });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
@@ -39,11 +53,13 @@
     }
 
     /* Safety net: if anything goes wrong, show everything after 3s rather
-       than leave the page half-empty. */
+       than leave the page half-empty. A display:none block (the markup for
+       the other breakpoint) measures as 0 and so is played too — harmless,
+       and it means a resize past 1280px never uncovers hidden words. */
     window.setTimeout(function () {
-      document.querySelectorAll('[data-reveal]:not([data-reveal="in"])').forEach(function (el) {
+      document.querySelectorAll('[data-reveal]:not([data-reveal="in"]), [data-typewriter]').forEach(function (el) {
         var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 1.5) el.setAttribute('data-reveal', 'in');
+        if (r.top < window.innerHeight * 1.5) show(el);
       });
     }, 3000);
   }

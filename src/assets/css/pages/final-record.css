@@ -56,3 +56,226 @@ a{color:#23395D;transition:color 220ms ease}a:hover{color:#BE9C71}[data-verified
   width: auto !important;
   height: auto !important;
 }
+
+/* ==========================================================================
+   Mobile — the record as nine chapters
+
+   Below 768px the record is a sticky tab strip with one chapter showing at a
+   time (record-tabs.js). The chapter copy keeps the export's inline styles
+   like the rest of the mobile block; these rules cover the pieces that carry
+   state — tabs, expand/collapse rows, buttons, the family chips — so the
+   states live in one place instead of being swapped inline.
+
+   Design-local colours the site tokens don't cover sit on .fa-rm, the way
+   the Your Memories pages keep theirs on .fa-memories.
+   ========================================================================== */
+.fa-rm {
+  --rm-tab-off:    #8a9ab0;  /* unselected tab                        */
+  --rm-muted:      #6f7d90;  /* small supporting text                 */
+  --rm-muted-2:    #5f6b7a;  /* body-sized supporting text            */
+  --rm-cream:      #F7F2EB;  /* icon wells, unselected family chips   */
+  --rm-donate:     #cbb69a;  /* "Donate in lieu of flowers" border    */
+  --rm-donate-ink: #a08863;
+  --rm-check-on:   #9FC3D8;  /* claimed tick on a selected chip       */
+}
+
+/* Everything this block hides is hidden by the script, never by CSS alone. */
+.fa-rm [hidden] { display: none !important; }
+
+.fa-rm-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@keyframes fa-rm-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Tab strip — sticks under the mobile header, scrolls sideways */
+.fa-rm-tabs {
+  position: sticky;
+  top: 84px; /* .fa-header-m height */
+  z-index: 4;
+  margin-top: 18px;
+  padding: 0 18px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  background: var(--fa-mist);
+  scrollbar-width: none;
+}
+.fa-rm-tabs::-webkit-scrollbar { display: none; }
+
+.fa-rm-tab {
+  flex: none;
+  padding: 18px 12px;
+  text-decoration: none;
+}
+.fa-rm-tab > span {
+  display: block;
+  font: 700 15px / 1 'Nunito Sans', sans-serif;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--rm-tab-off);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 9px;
+  white-space: nowrap;
+  transition: color 220ms ease, border-color 220ms ease;
+}
+.fa-rm-tab:hover > span { color: var(--fa-indigo); }
+.fa-rm-tab[aria-selected="true"] > span {
+  color: var(--fa-indigo);
+  border-bottom-color: var(--fa-camel);
+}
+.fa-rm-tab:focus-visible { outline: 2px solid var(--fa-steel); outline-offset: -2px; }
+
+.fa-rm-panel__body { animation: fa-rm-rise 220ms ease both; }
+
+/* Buttons — the design's full-width pills */
+.fa-rm-btn {
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 16px;
+  border-radius: 5px;
+  border: 1.5px solid transparent;
+  background: none;
+  font: 700 13px / 1 'Nunito Sans', sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+}
+.fa-rm-btn--camel { background: var(--fa-camel); border-color: var(--fa-camel); color: var(--fa-bone); }
+.fa-rm-btn--camel:hover { background: var(--fa-camel-600); border-color: var(--fa-camel-600); color: var(--fa-bone); }
+.fa-rm-btn--indigo { background: var(--fa-indigo); border-color: var(--fa-indigo); color: var(--fa-bone); }
+.fa-rm-btn--indigo:hover { background: var(--fa-indigo-800); border-color: var(--fa-indigo-800); color: var(--fa-bone); }
+.fa-rm-btn--outline { border-color: var(--fa-indigo); color: var(--fa-indigo); }
+.fa-rm-btn--outline:hover { background: var(--fa-indigo); color: var(--fa-bone); }
+.fa-rm-btn--donate { border-color: var(--rm-donate); color: var(--rm-donate-ink); }
+.fa-rm-btn--donate:hover { border-color: var(--fa-camel); color: var(--fa-camel); }
+.fa-rm-btn--ghost { border-color: var(--fa-rule); color: var(--rm-muted); }
+.fa-rm-btn--ghost:hover { border-color: var(--fa-indigo); color: var(--fa-indigo); }
+.fa-rm-btn:focus-visible { outline: 2px solid var(--fa-steel); outline-offset: 2px; }
+
+/* Expand / collapse rows */
+.fa-rm-acc__head {
+  width: 100%;
+  padding: 22px 0 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.fa-rm-acc__head:focus-visible { outline: 2px solid var(--fa-steel); outline-offset: 2px; }
+.fa-rm-acc__text { flex: 1; display: flex; flex-direction: column; gap: 9px; }
+.fa-rm-acc__kicker {
+  font: 700 13px / 1 'Nunito Sans', sans-serif;
+  letter-spacing: 3.2px;
+  text-transform: uppercase;
+  color: var(--fa-camel);
+}
+.fa-rm-acc__title {
+  font: 700 21px / 1.3 'Nunito Sans', sans-serif;
+  letter-spacing: -0.4px;
+  color: var(--fa-indigo);
+  text-wrap: pretty;
+}
+.fa-rm-acc__sub { font: 300 14px / 1.6 'Nunito Sans', sans-serif; color: var(--rm-muted); }
+.fa-rm-acc__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--fa-rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+}
+.fa-rm-acc__head[aria-expanded="true"]  .fa-rm-acc__plus,
+.fa-rm-acc__head[aria-expanded="false"] .fa-rm-acc__minus { display: none; }
+.fa-rm-acc__body {
+  padding-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  animation: fa-rm-rise 220ms ease both;
+}
+
+/* Verified-record line in the hero — tap to read the note */
+.fa-rm-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: 300 14px / 1.55 'Nunito Sans', sans-serif;
+  color: var(--rm-muted);
+  cursor: pointer;
+  align-self: flex-start;
+  text-align: left;
+}
+.fa-rm-verified:focus-visible { outline: 2px solid var(--fa-steel); outline-offset: 2px; }
+
+/* Family tree chips */
+.fa-rm-chip {
+  padding: 11px 15px;
+  border-radius: 5px;
+  background: var(--rm-cream);
+  border: 1px solid var(--fa-rule);
+  color: var(--fa-indigo);
+  font: 700 15px / 1.2 'Nunito Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: background 220ms ease, color 220ms ease;
+}
+.fa-rm-chip svg { flex: none; stroke: var(--fa-steel); }
+.fa-rm-chip[aria-pressed="true"] {
+  background: var(--fa-indigo);
+  border-color: var(--fa-indigo);
+  color: var(--fa-bone);
+}
+.fa-rm-chip[aria-pressed="true"] svg { stroke: var(--rm-check-on); }
+.fa-rm-chip:focus-visible { outline: 2px solid var(--fa-steel); outline-offset: 2px; }
+
+/* "Eighty years, in moments" — sideways card scroller */
+.fa-rm-moments {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 0 24px 6px;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 24px;
+  scrollbar-width: none;
+}
+.fa-rm-moments::-webkit-scrollbar { display: none; }
+.fa-rm-moments > * { flex: none; scroll-snap-align: start; }
+
+.fa-rm textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 108px;
+  resize: none;
+  border-radius: 8px;
+  padding: 13px;
+  font: 300 16px / 1.7 'Nunito Sans', sans-serif;
+  color: var(--fa-charcoal);
+  background: var(--fa-bone);
+  outline: none;
+}
+.fa-rm textarea:focus-visible { outline: 2px solid var(--fa-steel); outline-offset: 2px; }

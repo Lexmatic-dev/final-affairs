@@ -139,6 +139,10 @@ All in `assets/js/`, all plain, all `defer`red:
   from the design, not derived
 - `reveal.js` — scroll reveal on About Us
 - `record-search.js` — Final Record lookup
+- `record-tabs.js` — the Final Record on mobile: nine chapters behind a sticky
+  tab strip, plus the expand/collapse rows, share-a-memory forms, "show more
+  memories" and the family tree's selected person. Everything it hides it
+  hides itself at start-up, so with no JS the chapters simply stack
 
 **Never let CSS hide content pending JavaScript.** `reveal.js` exists because
 the design's reveal CSS parked 28 elements at `opacity: 0` with nothing to
