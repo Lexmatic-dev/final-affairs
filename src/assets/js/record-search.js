@@ -6,6 +6,17 @@
  *
  * Matching is loose on purpose: a visitor looking for "Eleanor Vance" or just
  * "eleanor" should find the record without typing it exactly.
+ *
+ * The page carries the search twice — once in the desktop markup, once in
+ * the mobile markup — so this binds every [data-record-search] it finds
+ * rather than a single pair of ids. Ids are unique per document, so the old
+ * id-based lookup only ever wired the desktop copy and the mobile search did
+ * nothing at all. Any further copy of the search works by marking it up:
+ *
+ *   [data-record-search]   the block holding one search
+ *     [data-record-name]     the name input
+ *     [data-record-submit]   the button or link that runs it
+ *     [data-record-status]   optional: where a miss is reported
  */
 (function () {
   'use strict';
@@ -33,10 +44,10 @@
     return null;
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var name = document.getElementById('record-search-name');
-    var button = document.getElementById('record-search-submit');
-    var status = document.getElementById('record-search-status');
+  function wire(root) {
+    var name = root.querySelector('[data-record-name]');
+    var button = root.querySelector('[data-record-submit]');
+    var status = root.querySelector('[data-record-status]');
     if (!name || !button) return;
 
     function search(event) {
@@ -61,5 +72,10 @@
     name.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') search(e);
     });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var forms = document.querySelectorAll('[data-record-search]');
+    Array.prototype.forEach.call(forms, wire);
   });
 })();

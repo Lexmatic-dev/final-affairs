@@ -28,3 +28,230 @@
 a { color: #23395D; }
   a:hover { color: #BE9C71; }
   * { box-sizing: border-box; }
+
+/* ---------------------------------------------------------------------------
+   Write a letter dialog
+   ---------------------------------------------------------------------------
+   The envelope on the wall, and the mobile action bar button, open this.
+   Markup is a sibling of <main> (like the nav drawer) so it can cover the
+   page; letter.js drives it. Hidden via the `hidden` attribute, never via
+   opacity, so it is invisible to assistive tech and to a no-JS visitor
+   rather than merely transparent.
+
+   Mobile-first: a full-screen sheet on phones, the design's centred 640px
+   card from 768px up — the same breakpoint the page body switches at. */
+
+/* Above the sticky mobile header (z-index 100) and the nav drawer (200).
+   The design drew this at 60, but its artboard had no sticky header; at 60
+   the header renders on top of the sheet on a phone. */
+.fa-letter { position: fixed; inset: 0; z-index: 300; }
+
+/* `display: flex` in the 768px block below outranks the UA's [hidden] rule,
+   which would leave the scrim live and swallowing clicks on the page behind
+   it. Keep the attribute authoritative. */
+.fa-letter[hidden] { display: none; }
+
+.fa-letter__scrim { position: absolute; inset: 0; background: rgba(38, 38, 37, 0.42); }
+
+.fa-letter__panel {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--canvas);
+  padding: 26px 24px 34px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fa-letter__close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  font-family: var(--font-sans);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--dim);
+  cursor: pointer;
+  transition: color 220ms ease;
+}
+.fa-letter__close:hover { color: var(--fa-camel); }
+
+.fa-letter__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--fa-camel);
+}
+
+.fa-letter__title {
+  margin: 10px 0 8px;
+  font-family: var(--font-sans);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--head);
+}
+
+.fa-letter__lead {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.fa-letter__rule { height: 1px; background: var(--rule); margin: 22px 0; }
+
+.fa-letter__fields { display: flex; flex-direction: column; gap: 18px; }
+.fa-letter__field { display: flex; flex-direction: column; gap: 7px; }
+
+.fa-letter__label {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--head);
+}
+.fa-letter__optional {
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--muted);
+}
+
+.fa-letter__input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--ink);
+  transition: border-color 220ms ease;
+}
+.fa-letter__input:focus { border-color: var(--fa-steel); }
+
+.fa-letter__textarea { line-height: 1.6; resize: vertical; }
+
+.fa-letter__hint {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.fa-letter__count {
+  align-self: flex-end;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.fa-letter__count[data-over="true"] { color: var(--fa-camel-600); font-weight: 700; }
+
+.fa-letter__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.fa-letter__cancel {
+  background: transparent;
+  border: 0;
+  min-height: 44px;
+  padding: 0 4px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 220ms ease;
+}
+.fa-letter__cancel:hover { color: var(--fa-camel); }
+
+.fa-letter__submit {
+  padding: 17px 30px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--head);
+  color: var(--canvas);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 220ms ease;
+}
+.fa-letter__submit:hover { background: var(--fa-indigo-800); }
+.fa-letter__submit:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* mobile: the submit button spans the sheet, as the design draws it */
+.fa-letter__actions .fa-letter__submit { flex: 1 1 auto; }
+
+.fa-letter__sent { text-align: center; padding: 24px 0 8px; }
+.fa-letter__sent .fa-letter__submit { margin-top: 28px; }
+
+/* The envelope and the mobile action-bar button are real buttons now. */
+.fa-letter-trigger {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .fa-letter {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 56px 24px;
+    overflow-y: auto;
+  }
+
+  .fa-letter__panel {
+    width: 640px;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--nborder);
+    border-radius: var(--nradius);
+    box-shadow: var(--dshadow);
+    padding: 44px 48px 40px;
+  }
+
+  .fa-letter__close { top: 18px; right: 20px; font-size: 18px; }
+
+  .fa-letter__eyebrow { font-size: 13px; letter-spacing: 0.3em; }
+  .fa-letter__title { margin: 12px 0 10px; font-size: 34px; letter-spacing: -0.5px; }
+  .fa-letter__lead { font-size: 17px; line-height: 1.6; }
+  .fa-letter__rule { margin: 28px 0 26px; }
+  .fa-letter__fields { gap: 22px; }
+  .fa-letter__label { font-size: 11px; }
+  .fa-letter__input { padding: 12px 14px; font-size: 17px; }
+  .fa-letter__textarea { padding: 14px; }
+  .fa-letter__actions { margin-top: 30px; }
+  .fa-letter__actions .fa-letter__submit { flex: 0 0 auto; padding: 14px 30px; font-size: 11px; }
+
+  .fa-letter__sent { padding: 0; }
+  .fa-letter__sent .fa-letter__title { font-size: 30px; }
+}

@@ -47,10 +47,13 @@
 
 [data-drift]{animation:faDrift 14s ease-in-out infinite}
 
-/* mission: word-by-word soft rise */
-  [data-typewriter] [data-w]{display:inline-block;opacity:0;transform:translateY(0.32em);transition:opacity 900ms cubic-bezier(.22,.61,.36,1),transform 900ms cubic-bezier(.22,.61,.36,1)}
+/* mission: word-by-word soft rise.
+   Hiding is opt-in behind `js-reveal`, like the [data-reveal] rules above:
+   reveal.js adds that class only once it can take the words back out again,
+   so with no JavaScript the mission statement simply renders visible. */
+  .js-reveal [data-typewriter] [data-w]{display:inline-block;opacity:0;transform:translateY(0.32em);transition:opacity 900ms cubic-bezier(.22,.61,.36,1),transform 900ms cubic-bezier(.22,.61,.36,1)}
 
-[data-typewriter] [data-w].on{opacity:1;transform:translateY(0)}
+.js-reveal [data-typewriter] [data-w].on{opacity:1;transform:translateY(0)}
 
 @media (prefers-reduced-motion: reduce){
   [data-typewriter] [data-w]{opacity:1 !important;transform:none !important;transition:none !important}
